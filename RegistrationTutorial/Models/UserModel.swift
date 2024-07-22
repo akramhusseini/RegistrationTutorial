@@ -14,7 +14,7 @@ struct UserModel {
     var password: String
 }
 
-enum fieldId {
+enum fieldId: Hashable {
     case name
     case phone
     case email

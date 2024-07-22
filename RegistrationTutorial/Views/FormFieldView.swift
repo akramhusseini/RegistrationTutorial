@@ -14,18 +14,20 @@ struct FormFieldView: View {
     var isSecure: Bool = false
     var keyboardType: UIKeyboardType = .default
     var type: fieldId
+    var isFocused: Bool
     
     var body: some View {
+        let borderColor = isFocused ? Color.blue : (error == nil ? Color.gray : Color.red)
         VStack(alignment: .leading, spacing: 4) {
             if isSecure {
                 SecureField(title, text: $text)
-                    .padding()
-                    .background(RoundedRectangle(cornerRadius: 8).stroke(error == nil ? Color.gray : Color.red))
+                    .padding(12)
+                    .background(RoundedRectangle(cornerRadius: 8).stroke(borderColor))
                     .keyboardType(keyboardType)
             } else {
                 TextField(title, text: $text)
-                    .padding()
-                    .background(RoundedRectangle(cornerRadius: 8).stroke(error == nil ? Color.gray : Color.red))
+                    .padding(12)
+                    .background(RoundedRectangle(cornerRadius: 8).stroke(borderColor))
                     .keyboardType(keyboardType)
                     .onChange(of: text) { newValue in
                         switch type {
@@ -43,13 +45,16 @@ struct FormFieldView: View {
                 Text(error)
                     .foregroundColor(.red)
                     .font(.caption)
+                    .transition(.opacity)
+                    .animation(.easeInOut(duration: 0.3), value: error)
             }
         }
+        .padding(.bottom, 8)
     }
 }
 
 struct FormFieldView_Previews: PreviewProvider {
     static var previews: some View {
-        FormFieldView(title: "Full Name", text: .constant(""), error: "This field is required.", type: .name)
+        FormFieldView(title: "Full Name", text: .constant(""), error: "This field is required.", type: .name, isFocused: true)
     }
 }

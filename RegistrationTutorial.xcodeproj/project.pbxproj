@@ -16,6 +16,7 @@
 		EA8E22BF2C4D496100FE09EB /* FormFieldView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA8E22BE2C4D496100FE09EB /* FormFieldView.swift */; };
 		EA8E22C12C4D498E00FE09EB /* RegistrationViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA8E22C02C4D498E00FE09EB /* RegistrationViewModel.swift */; };
 		EA8E22C42C4D4EDB00FE09EB /* SuccessPopupView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA8E22C32C4D4EDB00FE09EB /* SuccessPopupView.swift */; };
+		EACAC0CC2C4E58CD00679F63 /* UIApplication.swift in Sources */ = {isa = PBXBuildFile; fileRef = EACAC0CB2C4E58CD00679F63 /* UIApplication.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -29,6 +30,7 @@
 		EA8E22BE2C4D496100FE09EB /* FormFieldView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FormFieldView.swift; sourceTree = "<group>"; };
 		EA8E22C02C4D498E00FE09EB /* RegistrationViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegistrationViewModel.swift; sourceTree = "<group>"; };
 		EA8E22C32C4D4EDB00FE09EB /* SuccessPopupView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SuccessPopupView.swift; sourceTree = "<group>"; };
+		EACAC0CB2C4E58CD00679F63 /* UIApplication.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIApplication.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -61,6 +63,7 @@
 		EA8E22A72C4D47A400FE09EB /* RegistrationTutorial */ = {
 			isa = PBXGroup;
 			children = (
+				EACAC0CA2C4E58BE00679F63 /* Extensions */,
 				EA8E22B72C4D48F600FE09EB /* Models */,
 				EA8E22A82C4D47A400FE09EB /* RegistrationTutorialApp.swift */,
 				EA8E22BA2C4D491800FE09EB /* Views */,
@@ -104,6 +107,14 @@
 				EA8E22C02C4D498E00FE09EB /* RegistrationViewModel.swift */,
 			);
 			path = ViewModels;
+			sourceTree = "<group>";
+		};
+		EACAC0CA2C4E58BE00679F63 /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				EACAC0CB2C4E58CD00679F63 /* UIApplication.swift */,
+			);
+			path = Extensions;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -176,6 +187,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				EACAC0CC2C4E58CD00679F63 /* UIApplication.swift in Sources */,
 				EA8E22AB2C4D47A400FE09EB /* ContentView.swift in Sources */,
 				EA8E22C12C4D498E00FE09EB /* RegistrationViewModel.swift in Sources */,
 				EA8E22B92C4D490300FE09EB /* UserModel.swift in Sources */,

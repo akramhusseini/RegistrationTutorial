@@ -9,7 +9,8 @@ import SwiftUI
 
 struct SuccessPopupView: View {
     @Binding var showPopup: Bool
-
+    @Environment(\.colorScheme) var colorScheme // Detect the current color scheme
+    
     var body: some View {
         VStack {
             Spacer()
@@ -24,13 +25,17 @@ struct SuccessPopupView: View {
                 Text("Registration Successful!")
                     .font(.title2)
                     .fontWeight(.bold)
+                    .foregroundColor(.primary)
 
                 Text("Your registration request has been submitted successfully. You will receive a confirmation soon.")
                     .multilineTextAlignment(.center)
                     .padding()
+                    .foregroundColor(.primary)
 
                 Button(action: {
-                    showPopup = false
+                    withAnimation {
+                        showPopup = false
+                    }
                 }) {
                     Text("Close")
                         .frame(maxWidth: .infinity)
@@ -41,15 +46,20 @@ struct SuccessPopupView: View {
                 }
             }
             .padding()
-            .background(Color.white)
+            .background(Color(uiColor: .systemBackground))
             .cornerRadius(12)
-            .shadow(radius: 10)
+            .shadow(color: shadowColor, radius: 10)
             .padding(.horizontal, 40)
-
+            .transition(.scale) // Scale transition for appearance and disappearance
             Spacer()
         }
         .background(Color.black.opacity(0.6).edgesIgnoringSafeArea(.all))
     }
+    
+    // Computed property to determine shadow color based on color scheme
+       private var shadowColor: Color {
+           colorScheme == .dark ? Color.white.opacity(0.2) : Color.black.opacity(0.2)
+       }
 }
 
 struct SuccessPopupView_Previews: PreviewProvider {

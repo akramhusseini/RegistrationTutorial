@@ -10,33 +10,65 @@ import SwiftUI
 struct RegistrationFormView: View {
     @StateObject private var viewModel = RegistrationViewModel()
     @State private var showSuccessPopup = false
-
+    @FocusState private var focusedField: fieldId?
+    
     var body: some View {
         ZStack {
-            VStack(spacing: 16) {
-                FormFieldView(title: "Full Name", text: $viewModel.fullName, error: viewModel.fullNameError, type: .name)
-                FormFieldView(title: "Phone Number", text: $viewModel.phoneNumber, error: viewModel.phoneNumberError, keyboardType: .numberPad, type: .phone)
-                FormFieldView(title: "Email", text: $viewModel.email, error: viewModel.emailError, type: .email)
-                FormFieldView(title: "Password", text: $viewModel.password, error: viewModel.passwordError, isSecure: true, type: .password)
-
-                Button(action: {
-                    viewModel.validateAndSubmit()
-                    if viewModel.isFormValid {
-                        showSuccessPopup = true
+            ScrollView {
+                VStack(spacing: 16) {
+                    FormFieldView(
+                        title: "Full Name",
+                        text: $viewModel.fullName,
+                        error: viewModel.fullNameError,
+                        type: .name,
+                        isFocused: focusedField == .name)
+                    .focused($focusedField, equals: .name)
+                    FormFieldView(
+                        title: "Phone Number",
+                        text: $viewModel.phoneNumber,
+                        error: viewModel.phoneNumberError,
+                        keyboardType: .numberPad,
+                        type: .phone,
+                        isFocused: focusedField == .phone)
+                    .focused($focusedField, equals: .phone)
+                    FormFieldView(
+                        title: "Email",
+                        text: $viewModel.email,
+                        error: viewModel.emailError,
+                        type: .email,
+                        isFocused: focusedField == .email)
+                    .focused($focusedField, equals: .email)
+                    FormFieldView(
+                        title: "Password",
+                        text: $viewModel.password,
+                        error: viewModel.passwordError,
+                        isSecure: true,
+                        type: .password,
+                        isFocused: focusedField == .password)
+                    .focused($focusedField, equals: .password)
+                    Button(action: {
+                        UIApplication.shared.endEditing() // Close the keyboard
+                        viewModel.validateAndSubmit()
+                        if viewModel.isFormValid {
+                            withAnimation {
+                                showSuccessPopup = true
+                            }
+                        }
+                    }) {
+                        Text("Create Account")
+                            .frame(maxWidth: .infinity)
+                            .padding()
+                            .background(viewModel.canAttemptRegister ? Color.blue : Color.gray)
+                            .foregroundColor(.white)
+                            .cornerRadius(8)
                     }
-                }) {
-                    Text("Create Account")
-                        .frame(maxWidth: .infinity)
-                        .padding()
-                        .background(viewModel.canAttemptRegister ? Color.blue : Color.gray)
-                        .foregroundColor(.white)
-                        .cornerRadius(8)
+                    .disabled(!viewModel.canAttemptRegister)
+                    
+                    Spacer()
                 }
-                .disabled(!viewModel.canAttemptRegister)
-
-                Spacer()
+                .padding(16.0)
             }
-            .padding()
+          
             .onChange(of: viewModel.fullName) { _ in viewModel.liveValidate() }
             .onChange(of: viewModel.phoneNumber) { _ in viewModel.liveValidate() }
             .onChange(of: viewModel.email) { _ in viewModel.liveValidate() }
@@ -54,3 +86,4 @@ struct RegistrationFormView_Previews: PreviewProvider {
         RegistrationFormView()
     }
 }
+

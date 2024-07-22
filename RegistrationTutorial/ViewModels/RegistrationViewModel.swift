@@ -33,10 +33,12 @@ class RegistrationViewModel: ObservableObject {
     }
     
     func validateAndSubmit() {
-        fullNameError = fullName.isEmpty ? "Full Name is required" : nil
-        phoneNumberError = validatePhoneNumber(phoneNumber)
-        emailError = validateEmail(email)
-        passwordError = validatePassword(password)
+        withAnimation {
+            fullNameError = fullName.isEmpty ? "Full Name is required" : nil
+            phoneNumberError = validatePhoneNumber(phoneNumber)
+            emailError = validateEmail(email)
+            passwordError = validatePassword(password)
+        }
     }
     
     func validatePhoneNumber(_ phoneNumber: String) -> String? {
