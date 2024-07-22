@@ -13,7 +13,8 @@ struct FormFieldView: View {
     var error: String?
     var isSecure: Bool = false
     var keyboardType: UIKeyboardType = .default
-
+    var type: fieldId
+    
     var body: some View {
         VStack(alignment: .leading, spacing: 4) {
             if isSecure {
@@ -27,8 +28,13 @@ struct FormFieldView: View {
                     .background(RoundedRectangle(cornerRadius: 8).stroke(error == nil ? Color.gray : Color.red))
                     .keyboardType(keyboardType)
                     .onChange(of: text) { newValue in
-                        if keyboardType == .numberPad {
+                        switch type {
+                        case .phone:
                             text = newValue.filter { "0123456789".contains($0) }
+                        case .name:
+                            text = newValue.filter { ("a"..."z").contains($0) || ("A"..."Z").contains($0) }
+                        default: break
+                            
                         }
                     }
             }
@@ -44,6 +50,6 @@ struct FormFieldView: View {
 
 struct FormFieldView_Previews: PreviewProvider {
     static var previews: some View {
-        FormFieldView(title: "Full Name", text: .constant(""), error: "This field is required.")
+        FormFieldView(title: "Full Name", text: .constant(""), error: "This field is required.", type: .name)
     }
 }

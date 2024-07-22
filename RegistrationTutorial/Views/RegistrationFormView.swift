@@ -14,10 +14,10 @@ struct RegistrationFormView: View {
     var body: some View {
         ZStack {
             VStack(spacing: 16) {
-                FormFieldView(title: "Full Name", text: $viewModel.fullName, error: viewModel.fullNameError)
-                FormFieldView(title: "Phone Number", text: $viewModel.phoneNumber, error: viewModel.phoneNumberError, keyboardType: .numberPad)
-                FormFieldView(title: "Email", text: $viewModel.email, error: viewModel.emailError)
-                FormFieldView(title: "Password", text: $viewModel.password, error: viewModel.passwordError, isSecure: true)
+                FormFieldView(title: "Full Name", text: $viewModel.fullName, error: viewModel.fullNameError, type: .name)
+                FormFieldView(title: "Phone Number", text: $viewModel.phoneNumber, error: viewModel.phoneNumberError, keyboardType: .numberPad, type: .phone)
+                FormFieldView(title: "Email", text: $viewModel.email, error: viewModel.emailError, type: .email)
+                FormFieldView(title: "Password", text: $viewModel.password, error: viewModel.passwordError, isSecure: true, type: .password)
 
                 Button(action: {
                     viewModel.validateAndSubmit()

@@ -13,3 +13,10 @@ struct UserModel {
     var email: String
     var password: String
 }
+
+enum fieldId {
+    case name
+    case phone
+    case email
+    case password
+}
